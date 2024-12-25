@@ -1,0 +1,8 @@
+name: JoinQuitMessages
+version: '1.0'
+main: net.dungeon.joinQuitMessages.JoinQuitPlugin
+api-version: '1.21'
+load: STARTUP
+authors: [ DungeonFinder ]
+description: This plugin shows custom join and quit messages in the chat
+website: https://dungeonhd.net/development
