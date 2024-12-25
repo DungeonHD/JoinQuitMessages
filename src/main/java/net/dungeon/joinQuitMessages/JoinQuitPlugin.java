@@ -14,7 +14,7 @@ public final class JoinQuitPlugin extends JavaPlugin {
         saveDefaultConfig();
         configManager = new ConfigManager(this);
 
-        getServer().getPluginManager().registerEvents(new PlayerEventListener(configManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerEventListener(this), this);
 
         JQMCommand jqmCommand = new JQMCommand(this, configManager);
         getCommand("jqm").setExecutor(jqmCommand);

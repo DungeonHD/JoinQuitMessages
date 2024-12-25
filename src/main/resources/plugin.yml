@@ -6,3 +6,7 @@ load: STARTUP
 authors: [ DungeonFinder ]
 description: This plugin shows custom join and quit messages in the chat
 website: https://dungeonhd.net/development
+commands:
+  jqm:
+    description: Reloads the plugin configuration
+    permission: jqm.reload

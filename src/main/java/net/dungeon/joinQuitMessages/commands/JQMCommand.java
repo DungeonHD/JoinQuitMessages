@@ -25,26 +25,22 @@ public class JQMCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender.hasPermission("jqm.reload")) {
-            if (args.length == 1) {
-                if (args[0].equalsIgnoreCase("reload")) {
-                    plugin.reloadConfig();
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                            plugin.getConfig().getString("Messages.Reload")));
-                } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                            plugin.getConfig().getString("Messages.Syntax")));
-                }
-            }  else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        plugin.getConfig().getString("Messages.Syntax")));
-            }
-        } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                    plugin.getConfig().getString("Messages.NoPermission")));
+        // Check for permission
+        if (!sender.hasPermission("jqm.reload")) {
+            sender.sendMessage(getMessage("Messages.NoPermission", "&cYou don't have permission to execute this command."));
+            return true;
         }
 
-        return false;
+        // Check for arguments
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            plugin.reloadConfig();
+            sender.sendMessage(getMessage("Messages.Reload", "&aConfiguration reloaded successfully!"));
+            return true;
+        }
+
+        // Syntax error message
+        sender.sendMessage(getMessage("Messages.Syntax", "&cUsage: /jqm reload"));
+        return true;
     }
 
     @Override
@@ -57,5 +53,20 @@ public class JQMCommand implements CommandExecutor, TabCompleter {
             return completions;
         }
         return Collections.emptyList();
+    }
+
+    /**
+     * Retrieves a message from the configuration or returns a default value.
+     *
+     * @param path         Path to the message in the configuration.
+     * @param defaultValue Default value if the message is not defined or null.
+     * @return Translated message.
+     */
+    private String getMessage(String path, String defaultValue) {
+        String message = plugin.getConfig().getString(path);
+        if (message == null || message.isEmpty()) {
+            message = defaultValue;
+        }
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 }
