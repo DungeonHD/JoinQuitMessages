@@ -1,0 +1,9 @@
+# Plugin messages
+Messages:
+  NoPermissions: '&cYou don''t have permissions to execute this command!'
+  Syntax: '&cThere was an error in your syntax! try &e/jqm reload'
+  Reload: '&aThe plugin was successfully reloaded!'
+
+# Leave it blank ' ' to remove the join and quit messages in the chat.
+JoinMessage: '&7(&a+&7) %player% joined'
+QuitMessage: '&7(&a+&7) %player% left'
